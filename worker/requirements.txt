@@ -1,0 +1,4 @@
+pydantic
+requests
+psycopg2
+numpy
