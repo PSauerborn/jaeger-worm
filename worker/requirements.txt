@@ -2,4 +2,4 @@ pydantic
 requests
 psycopg2
 numpy
-python-hermes==0.0.2
+python-hermes==0.0.3
