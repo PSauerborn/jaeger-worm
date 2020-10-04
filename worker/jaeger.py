@@ -6,6 +6,7 @@ from typing import Any, List
 import requests
 from pydantic import ValidationError
 import numpy as np
+from hermes import counter_wrapper
 
 from models import JaegerTrace, JaegerSpan, JaegerProcess
 from config import JAEGER_QUERY_URL
@@ -28,6 +29,7 @@ def get_trace_timestamp(trace: JaegerTrace) -> int:
         timestamps.append(span.start_time)
     return min(timestamps).timestamp()
 
+@counter_wrapper('traces_analysed', labels={}, pre_execution=False)
 def aggregate_trace(service_name: str, trace: JaegerSpan):
     """Function used to analyse jaeger span"""
     LOGGER.debug('analysing trace %s with %d span(s)', trace.trace_id, len(trace.spans))

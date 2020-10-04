@@ -10,6 +10,12 @@ services:
     env_file:
     - .env
 
+  hermes-jaeger-worm:
+    build: ./hermes
+    container_name: hermes-jaeger-worm
+    networks:
+    - core
+
 networks:
   core:
     name: core

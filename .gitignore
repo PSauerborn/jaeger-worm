@@ -33,7 +33,8 @@ MANIFEST
 *.manifest
 *.spec
 
-*.json
+trace.json
+traces.json
 
 # Installer logs
 pip-log.txt

@@ -4,6 +4,8 @@ import logging
 import time
 from datetime import datetime, timedelta
 
+from hermes import counter_wrapper, gauge_wrapper, set_hermes_config
+
 from config import WORKER_INTERVAL_MINUTES
 from jaeger import get_traces, analyse_traces
 from persistence import get_service_list, insert_service_analysis
@@ -11,6 +13,7 @@ from persistence import get_service_list, insert_service_analysis
 LOGGER = logging.getLogger(__name__)
 
 
+@counter_wrapper('jobs_processed', labels={}, pre_execution=False)
 def analyse_jaeger_data():
     """Target function used to analyse jaeger data
     on interval"""
@@ -29,6 +32,7 @@ def analyse_jaeger_data():
 
     return results
 
+@gauge_wrapper('in_process', labels={})
 def get_sleep_time(start: datetime, delta) -> int:
     """Function used to determine sleep
     interval"""
@@ -60,4 +64,5 @@ def timer(handler_func: object, interval_minutes: int, fail_on_error: bool = Fal
 
 if __name__ == '__main__':
 
+    set_hermes_config('hermes-jaeger-worm', 7789)
     timer(analyse_jaeger_data, WORKER_INTERVAL_MINUTES)

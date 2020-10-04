@@ -1,0 +1,22 @@
+{
+    "service_name": "jaeger_worm",
+    "gauges": [
+        {
+            "metric_name": "in_process",
+            "metric_description": "number of worker process currently in process",
+            "labels": []
+        }
+    ],
+    "counters": [
+        {
+            "metric_name": "traces_analysed",
+            "metric_description": "number of total traces analyzed",
+            "labels": ["service"]
+        },
+        {
+            "metric_name": "jobs_processed",
+            "metric_description": "total number of jobs processed",
+            "labels": []
+        }
+    ]
+}
